@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMultiApp.API", "DemoMultiApp.API\DemoMultiApp.API.csproj", "{03CA3DF8-C88D-4DF4-84F0-4A069546FC60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoMultiApp.API", "DemoMultiApp.API\DemoMultiApp.API.csproj", "{03CA3DF8-C88D-4DF4-84F0-4A069546FC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMultiApp.Core", "DemoMultiApp.Core\DemoMultiApp.Core.csproj", "{DB2F40D8-D282-4702-AB7C-6E28F68B1FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoMultiApp.Core", "DemoMultiApp.Core\DemoMultiApp.Core.csproj", "{DB2F40D8-D282-4702-AB7C-6E28F68B1FDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMultiApp.Data", "DemoMultiApp.Data\DemoMultiApp.Data.csproj", "{1E9B8BFC-7B1B-4FB7-AF91-AE11F03B8D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoMultiApp.Data", "DemoMultiApp.Data\DemoMultiApp.Data.csproj", "{1E9B8BFC-7B1B-4FB7-AF91-AE11F03B8D12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoMultiApp.Web", "DemoMultiApp.Web\DemoMultiApp.Web.csproj", "{55DC0A58-2508-4798-B956-1B31087C9823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1E9B8BFC-7B1B-4FB7-AF91-AE11F03B8D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E9B8BFC-7B1B-4FB7-AF91-AE11F03B8D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E9B8BFC-7B1B-4FB7-AF91-AE11F03B8D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55DC0A58-2508-4798-B956-1B31087C9823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55DC0A58-2508-4798-B956-1B31087C9823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55DC0A58-2508-4798-B956-1B31087C9823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55DC0A58-2508-4798-B956-1B31087C9823}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

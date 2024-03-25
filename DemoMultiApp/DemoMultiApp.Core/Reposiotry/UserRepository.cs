@@ -25,9 +25,24 @@ namespace DemoMultiApp.Core.Reposiotry
             _configuration = configuration;
         }
 
+        public async Task<bool> DeleteUserAsync(string id)
+        {
+            bool result = false;
+            UserModel user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                user.IsActive = false;
+                var disable = await _userManager.UpdateAsync(user);
+                if (disable.Succeeded)
+                    result = true;
+            }
+            return result;
+        }
+
         public async Task<List<UserGetViewModel>> GetAllActiveUsers()
         {
             List<UserGetViewModel> users = await (from user in _context.Users
+                                                  where user.IsActive.Equals(true)
                                                   select new UserGetViewModel
                                                   {
                                                       Id = user.Id,
@@ -43,6 +58,7 @@ namespace DemoMultiApp.Core.Reposiotry
             bool result = false;
             try
             {
+                user.IsActive = true;
                 var create = await _userManager.CreateAsync(user, password);
                 if (create.Succeeded)
                 {
@@ -58,6 +74,26 @@ namespace DemoMultiApp.Core.Reposiotry
             {
                 return result;
             }
+        }
+
+        public async Task<bool> PutUserAsync(UserModel user, string? roleName)
+        {
+            bool result = false;
+            if (user != null)
+            {
+                var update = await _userManager.UpdateAsync(user);
+                if (update.Succeeded)
+                {
+                    var role = await (from a in _context.UserRoles
+                                      join b in _context.Roles on a.RoleId equals b.Id
+                                      where a.UserId.Equals(user.Id)
+                                      select b.Name).FirstOrDefaultAsync();
+                    var updateRole = await _userManager.RemoveFromRoleAsync(user, role);
+                    if (updateRole.Succeeded)
+                        result = true;
+                }
+            }
+            return result;
         }
     }
 }

@@ -10,7 +10,9 @@ namespace DemoMultiApp.Core.Interface
 {
     public interface IUserRepository
     {
+        Task<bool> DeleteUserAsync(string id);
         Task<List<UserGetViewModel>> GetAllActiveUsers();
         Task<bool> PostUserAsync(UserModel user, string password, string roleName);
+        Task<bool> PutUserAsync(UserModel user, string? roleName);
     }
 }

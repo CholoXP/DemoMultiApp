@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace DemoMultiApp.API.Controllers
 {
     [ApiController]
-    [Route("/API/Session")]
+    [Route("/API/User")]
     [Authorize]
     public class UserAPIController : ControllerBase
     {
@@ -51,6 +51,36 @@ namespace DemoMultiApp.API.Controllers
                 return Ok(await _userRepository.GetAllActiveUsers());
             else
                 return Unauthorized();
+        }
+        [HttpPut("PutUser")]
+        public async Task<IActionResult> PutUser([FromBody] UserPutViewModel jsonData)
+        {
+            var tokenData = HttpContext.User.Identity as ClaimsIdentity;
+            bool isValid = await _functionRepository.VerifyToken(tokenData);
+            if (!isValid)
+                return Unauthorized();
+            if (jsonData == null)
+                return BadRequest(new { Message = "Json Data is empty" });
+            UserModel user = await _userManager.FindByIdAsync(jsonData.Id);
+            if (user == null)
+                return NotFound();
+            _mapper.Map(jsonData, user);
+            if (user == null || string.IsNullOrWhiteSpace(jsonData.RoleName))
+                return BadRequest(new { Message = "Some fields are required" });
+            bool result = await _userRepository.PutUserAsync(user, jsonData.RoleName);
+            return result ? Ok(new { Message = "Success" }) : BadRequest(new { Message = "Error" });
+        }
+        [HttpDelete("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            var tokenData = HttpContext.User.Identity as ClaimsIdentity;
+            bool isValid = await _functionRepository.VerifyToken(tokenData);
+            if (!isValid)
+                return Unauthorized();
+            if (string.IsNullOrWhiteSpace(Id))
+                return BadRequest(new { Message = "Id is empty" });
+            bool result = await _userRepository.DeleteUserAsync(Id);
+            return result ? Ok(new { Message = "Success" }) : BadRequest(new { Message = "Error" });
         }
     }
 }

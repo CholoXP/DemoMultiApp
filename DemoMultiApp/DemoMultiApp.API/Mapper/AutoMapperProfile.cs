@@ -9,6 +9,7 @@ namespace DemoMultiApp.API.Mapper
         public AutoMapperProfile()
         {
             CreateMap<UserPostViewModel, UserModel>();
+            CreateMap<UserPutViewModel, UserModel>();
         }
     }
 }

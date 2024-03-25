@@ -29,8 +29,7 @@ namespace DemoMultiApp.API.Controllers
             _mapper = mapper;
         }
         [AllowAnonymous]
-        [HttpPost]
-        [Route("LogIn")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LogInViewModel login)
         {
             var user = await _userManager.FindByNameAsync(login.UserName);
